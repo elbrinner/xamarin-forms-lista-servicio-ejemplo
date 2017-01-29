@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.App">
+  <Application.Resources>
+
+    <!-- Application resource dictionary -->
+     <ResourceDictionary>
+       <!-- Colores generales -->
+       <Color x:Key="MainColor">#ff3b77</Color>
+       <Color x:Key="FontColor">#52656b</Color>
+       <Color x:Key="AccentColor1">#cdff00</Color>
+       <Color x:Key="AccentColor2">#b8b89f</Color>
+       <Color x:Key="BackgroundColor">#f9f9f9</Color>
+       <!-- Color menu -->
+       <Color x:Key="MenuColor">#52656b</Color>
+       <Color x:Key="MenuFontColor">#ffffff</Color>
+       
+    <!--<x:InvertBoolenConverter x:Key="InvertBool"></x:InvertBoolenConverter>-->
+       
+     </ResourceDictionary>
+
+  </Application.Resources>
+</Application>
