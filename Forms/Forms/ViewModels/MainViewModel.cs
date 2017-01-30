@@ -58,6 +58,10 @@ namespace Forms.ViewModels
 
         public async void LoadServiceInit()
         {
+            if (this.ListData != null)
+            {
+                return;
+            }
             this.IsBusy = true;
             try
             {
@@ -85,39 +89,7 @@ namespace Forms.ViewModels
 
         }
 
-        public async void Detail()
-        {
-            this.IsBusy = true;
-            try
-            {
-                var url = new Uri(string.Format(CultureInfo.InvariantCulture, Contants.Config.baseUrlDetail, this.SelectedItem?.id));
-                var cliente = new HttpClient();
-                var result = await cliente.GetAsync(url);
-                if (result.IsSuccessStatusCode)
-                {
-                    string content = await result.Content.ReadAsStringAsync();
-                    if (content != null)
-                    {
-                        var response = JsonConvert.DeserializeObject<DetailResponseDto>(content);
-                    }
-                   
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Detalle no disponible");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-            finally
-            {
-                this.IsBusy = false;
-            }
-
-        }
+       
 
      
 

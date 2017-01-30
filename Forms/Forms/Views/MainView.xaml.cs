@@ -17,6 +17,7 @@ namespace Forms.Views
         {
             InitializeComponent();
             this.BindingContext = new MainViewModel();
+            this.Title = "Películas más populares";
         }
 
         protected override async void OnAppearing()
@@ -29,7 +30,7 @@ namespace Forms.Views
          
         }
 
-        public void ListView_ItemDetail(object sender, ItemTappedEventArgs e)
+        public  void ListView_ItemDetail(object sender, ItemTappedEventArgs e)
         {
             ResultDto selected = e.Item as ResultDto;
 

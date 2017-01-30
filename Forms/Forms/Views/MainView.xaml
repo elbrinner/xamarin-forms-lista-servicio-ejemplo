@@ -15,7 +15,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Orientation="Horizontal" Padding="2,15">
+            <StackLayout Orientation="Horizontal">
               <Label Text="{Binding title}" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="" />
             </StackLayout>
           </ViewCell>

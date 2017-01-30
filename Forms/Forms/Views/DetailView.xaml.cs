@@ -18,5 +18,16 @@ namespace Forms.Views
             this.BindingContext = new DetailViewModel(item);
             this.Title = item.title;
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var vm = (DetailViewModel)BindingContext;
+
+            await vm.DetailService();
+            var a = 1;
+
+        }
     }
 }
