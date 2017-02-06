@@ -22,7 +22,7 @@
 
 			
 			  <Label Grid.Row="1" XAlign="End" Grid.Column="0" Text="descripcion:"></Label>
-		    <Label Grid.Row="1"   Grid.Column="1" Text="{Binding DetailItem.original_title}"></Label>
+		    <Label Grid.Row="1"   Grid.Column="1" Text="{Binding DetailItem.overview}"></Label>
 
 		   <Label Grid.Row="2" XAlign="End" Grid.Column="0" Text="Titulo:"></Label>
 		    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Item.title}"></Label>

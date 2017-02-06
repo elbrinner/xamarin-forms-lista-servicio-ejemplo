@@ -15,19 +15,10 @@ namespace Forms.Views
         public DetailView(ResultDto item)
         {
             InitializeComponent();
-            this.BindingContext = new DetailViewModel(item);
-            this.Title = item.title;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            var vm = (DetailViewModel)BindingContext;
-
-            await vm.DetailService();
-            var a = 1;
-
+            //this.BindingContext = new DetailViewModel(item);
+            var vm = new DetailViewModel(item);
+            this.BindingContext = vm;
+            vm.Initialize(this);
         }
     }
 }

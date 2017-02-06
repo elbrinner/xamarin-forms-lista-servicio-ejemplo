@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
              x:Class="Forms.Views.MainView">
   <ContentPage.Content>
 		<StackLayout>
@@ -10,13 +11,13 @@
     <ListView x:Name="listView" SeparatorVisibility="None"  
              
              ItemsSource="{Binding ListData.results}"
-             ItemTapped="ListView_ItemDetail">
-      <!--SelectedItem="{Binding SelectedItem, Mode=TwoWay}"-->
+            
+      SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
             <StackLayout Orientation="Horizontal">
-              <Label Text="{Binding title}" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="" />
+              <Label Text="{Binding title}"  HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="" />
             </StackLayout>
           </ViewCell>
         </DataTemplate>

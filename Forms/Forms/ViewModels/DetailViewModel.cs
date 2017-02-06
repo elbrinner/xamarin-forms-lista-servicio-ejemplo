@@ -7,6 +7,7 @@ using Forms.Dtos;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Net.Http;
+using Forms.Services.Facade;
 
 namespace Forms.ViewModels
 {
@@ -15,6 +16,7 @@ namespace Forms.ViewModels
         private ResultDto item;
         private string img;
         private DetailResponseDto detailItem;
+        private readonly MovieFacade movieFacade;
 
         public DetailResponseDto DetailItem
         {
@@ -61,42 +63,32 @@ namespace Forms.ViewModels
         {
             this.Img = Contants.Config.imgBig + item.poster_path;
             this.Item = item;
+            this.movieFacade = new MovieFacade();
         }
 
-        public async Task<bool> DetailService()
+        protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             this.IsBusy = true;
             try
             {
-                var url = new Uri(string.Format(CultureInfo.InvariantCulture, Contants.Config.baseUrlDetail, this.Item?.id));
-                var cliente = new HttpClient();
-                var result = await cliente.GetAsync(url);
-                if (result.IsSuccessStatusCode)
-                {
-                    string content = await result.Content.ReadAsStringAsync();
-                    if (content != null)
-                    {
-                        this.DetailItem = JsonConvert.DeserializeObject<DetailResponseDto>(content);
-                    }
+                this.IsBusy = true;
+                var response = await this.movieFacade.DetailMovie(this.Item.id.ToString());
+                 this.DetailItem = response;
+               
+                this.IsBusy = false;
 
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Detalle no disponible");
-                }
-                
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-                return false;
+                await CurrentPage.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
                 this.IsBusy = false;
-               
+
             }
-            return true;
         }
+
+      
     }
 }

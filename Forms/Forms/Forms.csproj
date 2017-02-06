@@ -50,6 +50,8 @@
     <Compile Include="Dtos\ResultResponseDto.cs" />
     <Compile Include="Dtos\SpokenLanguageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Facade\MovieFacade.cs" />
+    <Compile Include="Services\Navigation\NavigationService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

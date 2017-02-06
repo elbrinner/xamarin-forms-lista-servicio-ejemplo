@@ -1,4 +1,5 @@
 ﻿using Forms.Dtos;
+using Forms.Services.Facade;
 using Forms.Views;
 using Newtonsoft.Json;
 using System;
@@ -15,11 +16,36 @@ namespace Forms.ViewModels
 {
     public class MainViewModel : BaseViewModel 
     {
-
         private ResultResponseDto listData;
         private ResultDto selectedItem;
+        private readonly MovieFacade movieFacade;
 
+        private ICommand basicCommand;
+        public MainViewModel()
+        {
+            this.Title = "Listado de las peliculas";
+            this.movieFacade = new MovieFacade();
+        }
+      
 
+        public ICommand BasicCommand
+        {
+            get { return basicCommand = basicCommand ?? new Command<ResultDto>(BasicCommandExecute); }
+        }
+
+        private void BasicCommandExecute(ResultDto selected)
+        {
+            Services.Navigation.NavigationService.Instance.NavigateTo<DetailViewModel>(selected);
+        }
+
+        protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+        {
+            this.ListMovie();
+        }
+
+        protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs) {
+            
+        }
         public ResultDto SelectedItem
         {
             get
@@ -32,7 +58,7 @@ namespace Forms.ViewModels
                 if (value != null)
                 {
                     selectedItem = value;
-                   // this.Detail();
+                    this.BasicCommandExecute(value);
                 }
                
                 OnPropertyChanged();
@@ -56,8 +82,9 @@ namespace Forms.ViewModels
             }
         }
 
-        public async void LoadServiceInit()
+        public async void ListMovie()
         {
+            
             if (this.ListData != null)
             {
                 return;
@@ -65,37 +92,20 @@ namespace Forms.ViewModels
             this.IsBusy = true;
             try
             {
-                var url = new Uri(string.Format(CultureInfo.InvariantCulture, Contants.Config.baseUrl, Contants.Config.param1));
-                var cliente = new HttpClient();
-                var result = await cliente.GetAsync(url);
-                if (result.IsSuccessStatusCode)
-                {
-                    string content = await result.Content.ReadAsStringAsync();
-                    if (content != null)
-                    {
-                        this.ListData = JsonConvert.DeserializeObject<ResultResponseDto>(content);
-                    }
-                    
-                }
-                
+                this.IsBusy = true;
+                var response = await this.movieFacade.MovieLast();
+                this.IsBusy = false;
+                this.ListData = response;
+
             }
             catch (Exception ex)
             {
+                await CurrentPage.DisplayAlert("Error", ex.Message, "OK");
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
             finally{
                 this.IsBusy = false;
             }          
-
         }
-
-       
-
-     
-
     }
-
-
-
-
 }

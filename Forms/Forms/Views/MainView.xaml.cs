@@ -12,29 +12,14 @@ namespace Forms.Views
 {
     public partial class MainView : ContentPage 
     {
-        public Boolean IsBusy { get; set; }
         public MainView()
         {
             InitializeComponent();
-            this.BindingContext = new MainViewModel();
-            this.Title = "Películas más populares";
-        }
+            var vm = new MainViewModel();
+            this.BindingContext = vm;
+            vm.Initialize(this);
+            var answer =  DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            var vm = (MainViewModel)BindingContext;
-
-            vm.LoadServiceInit();
-         
-        }
-
-        public  void ListView_ItemDetail(object sender, ItemTappedEventArgs e)
-        {
-            ResultDto selected = e.Item as ResultDto;
-
-            Navigation.PushAsync(new DetailView(selected));
         }
     }
 }

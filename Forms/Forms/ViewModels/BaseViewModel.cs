@@ -11,17 +11,29 @@ using Xamarin.Forms;
 
 namespace Forms.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : BindableObject
     {
-        private bool isBusy;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region variables y propiedades
+        protected bool isBusy;
+        protected string title;
+        protected Page CurrentPage { get; private set; }
 
-        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
+        #endregion
+
+        public void Initialize(Page page)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+           
+            CurrentPage = page;
+            CurrentPage.Appearing += CurrentPageOnAppearing; // Arranca al cargar el viewModel
+            CurrentPage.Disappearing += CurrentPageOnDisappearing;// Arranca al salir del viewModel
         }
 
+        protected virtual void CurrentPageOnAppearing(object sender, EventArgs eventArgs) { }
+
+        protected virtual void CurrentPageOnDisappearing(object sender, EventArgs eventArgs) { }      
+    
+        #region propiedades
         public bool IsBusy
         {
             get
@@ -32,11 +44,29 @@ namespace Forms.ViewModels
             set
             {
                     this.isBusy = value;
-                    this.OnPropertyChanged();
+                    this.OnPropertyChanged("IsBusy");
             }
         }
 
-       
+
+  
+        public string Title
+        {
+            get
+            {
+                return this.title;
+            }
+
+            set
+            {
+                this.title = value;
+                this.OnPropertyChanged("Title");
+            }
+        }
+
+        #endregion
+
+
 
     }
 }

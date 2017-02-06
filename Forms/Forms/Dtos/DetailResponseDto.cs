@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms.Dtos
 {
-   public class DetailResponseDto
+   public class DetailResponseDto : BaseDto
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }
