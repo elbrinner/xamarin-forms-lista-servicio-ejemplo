@@ -9,5 +9,5 @@ Aplicación para:
 => Windows 10 (UWP) tablet y escritorio
 => Windows 10 Mobile (UWP)
 
-Cualquiera duda contacta por twiter: @elbrinner
+Cualquiera duda contacta por twitter: @elbrinner
 
