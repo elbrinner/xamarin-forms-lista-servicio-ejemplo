@@ -15,6 +15,15 @@
        <!-- Color menu -->
        <Color x:Key="MenuColor">#52656b</Color>
        <Color x:Key="MenuFontColor">#ffffff</Color>
+
+       <Style x:Key="StatusGridStackLayout" TargetType="StackLayout">
+         <Setter Property="Padding">
+           <Setter.Value>
+             <OnIdiom x:TypeArguments="Thickness" Tablet="40, 40, 40, 0" Phone="5, 5, 5, 0"/>
+           </Setter.Value>
+         </Setter>
+       </Style>
+       
        
     <!--<x:InvertBoolenConverter x:Key="InvertBool"></x:InvertBoolenConverter>-->
        

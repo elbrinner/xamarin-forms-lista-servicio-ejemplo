@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:local="clr-namespace:Forms.Views;assembly=Forms"
+            Title="{Binding Title}"
+            x:Class="Forms.Views.SerieView">
+  <TabbedPage.Children>
+    <!--<local:ConfigView Title="Desde recurso"></local:ConfigView>-->
+    <ContentPage Title="Mejor Valoradas">
+      <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand">        
+          <Image Aspect="AspectFill" HorizontalOptions="FillAndExpand" Source="{Binding Banner1.Backdrop_path}"></Image>
+          <ListView SeparatorVisibility="None"            
+           ItemsSource="{Binding ListBestRatedMovies.Results}" SelectedItem="{Binding SelectedBestRatedMovies, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                      <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                    <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="{Binding Poster_path}"></Image>                   
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+          
+        </StackLayout>
+      </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Próximas">
+
+      <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand">
+          <Image Aspect="AspectFill" HorizontalOptions="FillAndExpand" Source="{Binding Banner2.Backdrop_path}"></Image>
+
+          <ListView SeparatorVisibility="None"
+             
+           ItemsSource="{Binding ListComingSoonMovies.Results}" SelectedItem="{Binding SelectedComingSoonMovies, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                      <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                    <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="{Binding Poster_path}"></Image>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+
+        </StackLayout>
+      </ScrollView>
+    </ContentPage>
+
+    <ContentPage Title="Cartelera">
+      <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand">
+          <Image Aspect="AspectFill" HorizontalOptions="FillAndExpand" Source="{Binding Banner3.Backdrop_path}"></Image>
+
+          <ListView SeparatorVisibility="None"
+             
+           ItemsSource="{Binding ListCine.Results}" SelectedItem="{Binding SelectedCine, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                      <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                    <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="{Binding Poster_path}"></Image>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+
+        </StackLayout>
+      </ScrollView>
+      
+    </ContentPage>
+
+    <ContentPage Title="Populares">
+
+      <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand">
+          <Image Aspect="AspectFill" HorizontalOptions="FillAndExpand" Source="{Binding Banner4.Backdrop_path}"></Image>
+
+          <ListView SeparatorVisibility="None"
+             
+           ItemsSource="{Binding ListDiscoverMovies.Results}" SelectedItem="{Binding SelectedDiscoverMovies, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                      <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                    <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="{Binding Poster_path}"></Image>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+
+        </StackLayout>
+      </ScrollView>
+
+    </ContentPage>
+    <!--<ContentPage Title="Page 3" Icon="ja.png" />-->
+  </TabbedPage.Children>
+</TabbedPage>

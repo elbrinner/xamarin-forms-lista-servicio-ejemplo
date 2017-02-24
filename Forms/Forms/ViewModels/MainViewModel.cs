@@ -1,4 +1,5 @@
 ﻿using Forms.Dtos;
+using Forms.Models;
 using Forms.Services.Facade;
 using Forms.Views;
 using Newtonsoft.Json;
@@ -16,27 +17,31 @@ namespace Forms.ViewModels
 {
     public class MainViewModel : BaseViewModel 
     {
-        private ResultResponseDto listData;
-        private ResultDto selectedItem;
+        private ResultResponse listData;
+        private Result selectedItem;
         private readonly MovieFacade movieFacade;
 
         private ICommand basicCommand;
+
         public MainViewModel()
         {
             this.Title = "Listado de las peliculas";
             this.movieFacade = new MovieFacade();
         }
-      
+
+        public MainViewModel(MasterDetailPage currentMasterPage)
+        {
+            this.CurrentMasterPage = currentMasterPage;
+            this.Title = "Listado de las peliculas";
+            this.movieFacade = new MovieFacade();
+        }
 
         public ICommand BasicCommand
         {
-            get { return basicCommand = basicCommand ?? new Command<ResultDto>(BasicCommandExecute); }
+            get { return basicCommand = basicCommand ?? new Command<Result>(BasicCommandExecute); }
         }
 
-        private void BasicCommandExecute(ResultDto selected)
-        {
-            Services.Navigation.NavigationService.Instance.NavigateTo<DetailViewModel>(selected);
-        }
+       
 
         protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
@@ -46,7 +51,7 @@ namespace Forms.ViewModels
         protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs) {
             
         }
-        public ResultDto SelectedItem
+        public Result SelectedItem
         {
             get
             {
@@ -58,7 +63,8 @@ namespace Forms.ViewModels
                 if (value != null)
                 {
                     selectedItem = value;
-                    this.BasicCommandExecute(value);
+                    BasicCommandExecute(value);
+                    //hacer uso de menseger para avisar al padre?
                 }
                
                 OnPropertyChanged();
@@ -66,9 +72,24 @@ namespace Forms.ViewModels
             }
         }
 
+        public void BasicCommandExecute(Result selected)
+        {
 
+            if (Device.Idiom == TargetIdiom.Tablet || Device.Idiom == TargetIdiom.Desktop)
+            {
+                //this.CurrentMasterPage.Detail = new DetailView(selected, this.CurrentMasterPage);
+                Services.Navigation.NavigationService.Instance.NavigateToMaster<DetailViewModel>(selected,this.CurrentMasterPage);
+            }
+            else
+            {
+                Services.Navigation.NavigationService.Instance.NavigateTo<DetailViewModel>(selected);
+            }
+            //App.Current.MainPage = new DetailView(selected); //quito el botón
 
-        public ResultResponseDto ListData
+            // 
+        }
+
+        public ResultResponse ListData
         {
             get
             {

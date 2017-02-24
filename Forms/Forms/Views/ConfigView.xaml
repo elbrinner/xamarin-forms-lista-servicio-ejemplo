@@ -1,0 +1,20 @@
+﻿
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.Views.ConfigView" >
+  <StackLayout Margin="20,30">
+    <Label  LineBreakMode="HeadTruncation" FontSize="20" Text="Página en construcción" Grid.Row="0" YAlign="Center" />
+
+    <Label FontSize="16" Text="Está aplicación es una Demo creada para explicar algunas funcionalidades y problemas con Xamarin Forms. No se trata de una aplicación completa y libre de errores."></Label>
+
+    <Label FontSize="12"  LineBreakMode="NoWrap" Text="Icon made by Freepik from www.flaticon.com"></Label>
+
+
+    <Label FontSize="12"  LineBreakMode="NoWrap" Text="Demo by @elbrinner"></Label>
+
+
+
+  </StackLayout>
+
+  </ContentPage>

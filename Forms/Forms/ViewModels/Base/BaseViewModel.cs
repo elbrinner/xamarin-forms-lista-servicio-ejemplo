@@ -18,6 +18,7 @@ namespace Forms.ViewModels
         protected bool isBusy;
         protected string title;
         protected Page CurrentPage { get; private set; }
+        public MasterDetailPage CurrentMasterPage { get; set; }
 
         #endregion
 
@@ -29,9 +30,28 @@ namespace Forms.ViewModels
             CurrentPage.Disappearing += CurrentPageOnDisappearing;// Arranca al salir del viewModel
         }
 
-        protected virtual void CurrentPageOnAppearing(object sender, EventArgs eventArgs) { }
+        public void Initialize(MasterDetailPage page)
+        {
+           this.CurrentMasterPage = page;
+           this.CurrentMasterPage.Appearing += CurrentPageOnAppearing; // Arranca al cargar el viewModel
+           this.CurrentMasterPage.Disappearing += CurrentPageOnDisappearing;// Arranca al salir del viewModel
+        }
 
-        protected virtual void CurrentPageOnDisappearing(object sender, EventArgs eventArgs) { }      
+        public void Initialize(MasterDetailPage currentMasterPage, Page page)
+        {
+            this.CurrentPage = page;
+            this.CurrentMasterPage = currentMasterPage;
+        }
+
+        protected virtual void CurrentPageOnAppearing(object sender, EventArgs eventArgs) {
+            this.CurrentMasterPage = CurrentMasterPage;
+            this.CurrentPage = CurrentPage;
+        }
+
+        protected virtual void CurrentPageOnDisappearing(object sender, EventArgs eventArgs) {
+            this.CurrentMasterPage = CurrentMasterPage;
+            this.CurrentPage = CurrentPage;
+        }      
     
         #region propiedades
         public bool IsBusy

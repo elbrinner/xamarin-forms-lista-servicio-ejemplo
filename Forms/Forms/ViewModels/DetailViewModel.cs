@@ -8,15 +8,18 @@ using Newtonsoft.Json;
 using System.Globalization;
 using System.Net.Http;
 using Forms.Services.Facade;
+using Xamarin.Forms;
+using Forms.Models;
 
 namespace Forms.ViewModels
 {
     public class DetailViewModel : BaseViewModel
     {
-        private ResultDto item;
+        private Result item;
         private string img;
         private DetailResponseDto detailItem;
         private readonly MovieFacade movieFacade;
+ 
 
         public DetailResponseDto DetailItem
         {
@@ -32,6 +35,8 @@ namespace Forms.ViewModels
             }
         }
 
+     
+
         public string Img
         {
             get
@@ -45,7 +50,7 @@ namespace Forms.ViewModels
                 this.OnPropertyChanged();
             }
         }
-        public ResultDto Item
+        public Result Item
         {
             get
             {
@@ -55,39 +60,28 @@ namespace Forms.ViewModels
             set
             {
                 this.item = value;
-                this.OnPropertyChanged();
+                this.OnPropertyChanged("Item");
             }
         }
 
-        public DetailViewModel(ResultDto item)
+        public DetailViewModel(Result item)
         {
-            this.Img = Contants.Config.imgBig + item.poster_path;
             this.Item = item;
-            this.movieFacade = new MovieFacade();
+            //this.movieFacade = new MovieFacade();
+            this.Title = item.Title == null ? item.Name : item.Title;
+
         }
 
-        protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+
+
+        public DetailViewModel(Result item, MasterDetailPage currentMasterPage) : this(item)
         {
-            this.IsBusy = true;
-            try
-            {
-                this.IsBusy = true;
-                var response = await this.movieFacade.DetailMovie(this.Item.id.ToString());
-                 this.DetailItem = response;
-               
-                this.IsBusy = false;
-
-            }
-            catch (Exception ex)
-            {
-                await CurrentPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                this.IsBusy = false;
-
-            }
+            this.CurrentMasterPage = currentMasterPage;
+            this.Img = Contants.Config.imgBig + item.Poster_path;
+            this.movieFacade = new MovieFacade();
+            this.Title = item.Title == null ? item.Name : item.Title;
         }
+
 
       
     }

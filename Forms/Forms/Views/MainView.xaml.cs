@@ -12,14 +12,23 @@ namespace Forms.Views
 {
     public partial class MainView : ContentPage 
     {
+
+
+        public MainView(MasterDetailPage currentMasterPage)
+        {
+            InitializeComponent();
+            var vm = new MainViewModel(currentMasterPage);
+            this.BindingContext = vm;
+            vm.Initialize(this);
+           // this.currentMasterPage = currentMasterPage;
+        }
+
         public MainView()
         {
             InitializeComponent();
             var vm = new MainViewModel();
             this.BindingContext = vm;
             vm.Initialize(this);
-            var answer =  DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
-
         }
     }
 }

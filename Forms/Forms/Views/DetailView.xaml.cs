@@ -7,18 +7,27 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Forms.Dtos;
+using Forms.Models;
 
 namespace Forms.Views
 {
     public partial class DetailView : ContentPage
-    {        
-        public DetailView(ResultDto item)
+    {
+
+        public DetailView(Result item)
         {
             InitializeComponent();
-            //this.BindingContext = new DetailViewModel(item);
             var vm = new DetailViewModel(item);
             this.BindingContext = vm;
             vm.Initialize(this);
+        }
+
+        public DetailView(Result item, MasterDetailPage currentMasterPage) : this(item)
+        {
+            InitializeComponent();
+            var vm = new DetailViewModel(item, currentMasterPage);
+            this.BindingContext = vm;
+            vm.Initialize(currentMasterPage,this);
         }
     }
 }

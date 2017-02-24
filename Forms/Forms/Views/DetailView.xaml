@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
              x:Class="Forms.Views.DetailView"> 
   
       <ScrollView>
-      <StackLayout>
-        <Grid>
-		    <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"  />
-                <ColumnDefinition Width="2*" />
-       </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-			        <RowDefinition Height="5*" />
-			        <RowDefinition Height="30" />
-					<RowDefinition Height="30" />
-				    <RowDefinition Height="30" />
-				    <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
+      <StackLayout Style="{StaticResource StatusGridStackLayout}">
+        
       
-        <Image  Grid.Row="0" Grid.ColumnSpan="2"  Source="{Binding Img}" />
-
-			
-			  <Label Grid.Row="1" XAlign="End" Grid.Column="0" Text="descripcion:"></Label>
-		    <Label Grid.Row="1"   Grid.Column="1" Text="{Binding DetailItem.overview}"></Label>
-
-		   <Label Grid.Row="2" XAlign="End" Grid.Column="0" Text="Titulo:"></Label>
-		    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Item.title}"></Label>
-
-			<Label Grid.Row="3" XAlign="End" Grid.Column="0" Text="Titulo:"></Label>
-		    <Label Grid.Row="3" Grid.Column="1" Text="{Binding Item.title}"></Label>
-		</Grid>
-  
+          
+        <Image   Source="{Binding Item.PhotoBig}" />		  
+          
+          
+	
+    <Label Text="{Binding Item.Overview}"></Label>
     
       </StackLayout>
     </ScrollView>

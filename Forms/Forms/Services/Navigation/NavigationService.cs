@@ -18,6 +18,9 @@ namespace Forms.Services.Navigation
         private IDictionary<Type, Type> viewModelRouting = new Dictionary<Type, Type>()
         {
             { typeof(MainViewModel),  typeof(MainView) },
+            { typeof(HomeViewModel),  typeof(HomeView) },
+            { typeof(IndexViewModel),  typeof(IndexView) },
+            { typeof(MovieViewModel),  typeof(MovieView) },
             { typeof(DetailViewModel), typeof(DetailView) }
         };
 
@@ -37,12 +40,19 @@ namespace Forms.Services.Navigation
         public void NavigateTo<TDestinationViewModel>(object navigationContext = null)
         {
             Type pageType = viewModelRouting[typeof(TDestinationViewModel)];
-            var page = Activator.CreateInstance(pageType,navigationContext) as Page; // Agregue el parametro. Revisar
+            var page = Activator.CreateInstance(pageType, navigationContext) as Page; // Agregue el parametro. Revisar
 
             if (page != null)
                 Application.Current.MainPage.Navigation.PushAsync(page);
         }
+        public void NavigateToMaster<TDestinationViewModel>(object navigationContext = null, MasterDetailPage master=null)
+        {
+            Type pageType = viewModelRouting[typeof(TDestinationViewModel)];
+            var page = Activator.CreateInstance(pageType, navigationContext, master) as Page; 
 
+            if (page != null)
+                Application.Current.MainPage.Navigation.PushAsync(page);
+        }
         public void NavigateTo(Type destinationType, object navigationContext = null)
         {
             Type pageType = viewModelRouting[destinationType];

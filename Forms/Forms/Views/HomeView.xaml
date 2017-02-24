@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:local="clr-namespace:Forms.Views;assembly=Forms"
+                   xmlns:win="clr-namespace:Windows.UI.Xaml.Controls.UI;assembly=Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime;targetPlatform=Windows"
+		              Title="{Binding Title}"
+                  Icon="menu.png"
+                  x:Class="Forms.Views.HomeView">
+
+  <MasterDetailPage.Master>
+    <ContentPage Title="Menu" Padding="0,40,0,0" Icon="menu.png"  BackgroundColor="{DynamicResource MenuColor}">
+      <ContentPage.Content>
+
+        <StackLayout VerticalOptions="FillAndExpand">
+
+          <Image WidthRequest="150" Margin="0,20,0,0" HorizontalOptions="Center"  Source="Logo.png"></Image>
+          <ListView x:Name="listView"
+                     SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
+                    ItemsSource="{Binding ListMenu}"  VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="30"></ColumnDefinition>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Text}" LineBreakMode="TailTruncation"></Label>
+
+                    <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="{Binding Icon}"></Image>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
+      </ContentPage.Content>
+    </ContentPage>
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <local:IndexView></local:IndexView>
+
+
+
+
+  </MasterDetailPage.Detail>
+
+</MasterDetailPage>

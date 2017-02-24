@@ -6,6 +6,8 @@ using System.Text;
 
 using Xamarin.Forms;
 using Forms.Converters;
+using Forms.Services.SpecificPlatform;
+
 namespace Forms
 {
     public partial class App : Application
@@ -13,8 +15,7 @@ namespace Forms
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new MainView());
+            MainPage = new NavigationPage(new HomeView());
         }
 
         protected override void OnStart()
